@@ -15,4 +15,7 @@ Criar um projeto com uma página JSP que a partir do ano e o mês informados com
 * Apache Tomcat;
 * HTML/CSS;
 * JSP;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a1fb8fb948464eddb75ad3685bd13c0a5f81a8f
