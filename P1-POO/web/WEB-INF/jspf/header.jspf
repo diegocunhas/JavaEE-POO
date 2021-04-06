@@ -10,7 +10,7 @@
         }
         else
         {
-            out.printl("Usuário não identificado")
+            out.println("Usuário não identificado");
         }
     }
     else if(request.getParameter("session.logout")!=null)
@@ -30,7 +30,7 @@
     {%>
     <form>
         Bem vindo, <%=session.getAttribute("session.username")%>
-        <input type="submite" name="session.logout" value="Sair"/>
+        <input type="submit" name="session.logout" value="Sair"/>
          | <a href="index.jsp">INDEX</a>
          | <a href="disciplinas.jsp">DISCIPLINAS</a> | 
     </form>
