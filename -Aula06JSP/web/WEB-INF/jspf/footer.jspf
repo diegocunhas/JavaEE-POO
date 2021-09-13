@@ -1,0 +1,6 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<hr/>
+<h4 align="center">Desenvolvido por Diego da Cunha Silva</h4>
+<h4 align="center">Fatec Praia Grande</h4>
+<hr/>
