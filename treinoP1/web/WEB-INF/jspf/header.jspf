@@ -1,0 +1,40 @@
+<%-- any content can be specified here e.g.: --%>
+<%
+    if(request.getParameter("session.login")!=null){
+        if(!request.getParameter("username").isEmpty()){
+            session = request.getSession();
+            String username = request.getParameter("username");
+            session.setAttribute("username",username);
+        }
+        else{
+            out.println("Por favor entre com um nome de usuário");
+        }
+    }
+    else if(request.getParameter("session.logout")!=null){
+        session.invalidate();
+        session = request.getSession(false);
+    }
+    
+
+%>
+
+<%@ page pageEncoding="UTF-8" %>
+<h3>Diego</h3>
+<%
+    if(session==null || session.getAttribute("username")==null){
+        %>
+        <form method="post">
+            <input type="text" name="username">
+            <input type="submit" name="session.login" value="Entrar">
+        </form>
+        
+    <%} else{%>
+    <form method="post">
+        Bem vindo, <%= session.getAttribute("username")%>
+        <input type="submit" name="session.logout" value="Sair">
+        <a href="index.jsp">Indice</a>
+        <a href="diego.jsp">Diego</a>
+        <a href="diego-dica-megasena.jsp">Mega</a>
+    </form>
+    <%}
+%>
