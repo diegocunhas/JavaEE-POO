@@ -1,0 +1,69 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+<h1>Diego App</h1>
+<%
+    if(request.getParameter("session.login")!=null){
+        if(!request.getParameter("username").isEmpty()){
+            session = request.getSession();
+            String username = request.getParameter("username");
+            session.setAttribute("username",username);
+            
+            ArrayList<Integer> numbers = new ArrayList<>();
+            while(numbers.size()<6){
+                int n = (int)(Math.random()*61);
+                if(!numbers.contains(n)){
+                    numbers.add(n);
+                }
+            }
+            session.setAttribute("numbers",numbers);
+            if(application.getAttribute("sessionList")==null){
+                ArrayList<String> sessionList = new ArrayList<>();
+                sessionList.add(username);
+                application.setAttribute("sessionList",sessionList);
+            }
+            else{
+                ArrayList<String> sessionList = (ArrayList)application.getAttribute("sessionList");
+                sessionList.add(username);
+                application.setAttribute("sessionList",sessionList);
+            }     
+        }
+        else{
+            out.println("Por favor entre com um nome de usuário");
+        }
+    }
+    else if(request.getParameter("session.logout")!=null){
+        if(application.getAttribute("sessionList")!=null){
+            ArrayList<String> sessionList = (ArrayList)application.getAttribute("sessionList");
+            sessionList.remove(session.getAttribute("username"));
+            application.setAttribute("sessionList",sessionList);
+            
+        }
+        session.removeAttribute("username");
+        session.removeAttribute("numbers");
+        session.invalidate();
+        session = request.getSession(false);
+    }
+%>
+
+
+<%
+    if(session==null || session.getAttribute("username")==null){
+        %>
+        <form method="post">
+            <input type="text" name="username">
+            <input type="submit" name="session.login" value="Entrar">
+        </form>
+        
+    <%} else{%>
+    <form method="post">
+        Bem vindo, <%= session.getAttribute("username")%>
+        <input type="submit" name="session.logout" value="Sair">
+        <a href="index.jsp">Indice</a>
+        <a href="diego.jsp">Diego</a>
+        <a href="diego-dica-megasena.jsp">Mega</a>
+    </form>
+    <%}
+%>
+<hr/>
